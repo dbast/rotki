@@ -1,22 +1,10 @@
-COMMON_LINT_PATHS = rotkehlchen/ rotkehlchen_mock/ package.py
-TOOLS_LINT_PATH = tools/
-ALL_LINT_PATHS = $(COMMON_LINT_PATHS) $(TOOLS_LINT_PATH)
-ISORT_PARAMS = --ignore-whitespace --skip-glob '*/node_modules/*' $(ALL_LINT_PATHS)
-ISORT_CHECK_PARAMS = --diff --check-only
-
-lint:
-	isort $(ISORT_PARAMS) $(ISORT_CHECK_PARAMS)
-	ruff check $(ALL_LINT_PATHS)
-	double-indent --dry-run $(ALL_LINT_PATHS)
-	flake8 $(ALL_LINT_PATHS)
-	mypy $(COMMON_LINT_PATHS) --install-types --non-interactive
-	pylint --rcfile .pylint.rc $(ALL_LINT_PATHS)
+pre-commit:
+	pre-commit run --verbose --color=always --all-files --show-diff-on-failure
 
 
-format:
-	ruff check $(ALL_LINT_PATHS) --fix
-	isort $(ISORT_PARAMS)
-	double-indent $(ALL_LINT_PATHS)
+pre-commit-fast:
+	pre-commit run --verbose --color=always --all-files ruff
+	pre-commit run --verbose --color=always --all-files mypy
 
 
 clean:
@@ -60,3 +48,5 @@ create-cassette:
 # https://stackoverflow.com/a/6273809/110395
 %:
 	@:
+
+.PHONY: all $(MAKECMDGOALS)
