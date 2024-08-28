@@ -56,6 +56,11 @@ warn_redundant_casts = true
 disallow_untyped_decorators = true
 disallow_untyped_calls = true
 mypy_path="./stubs/"
+exclude = [
+    'docs/conf.py',
+    'packaging/docker/entrypoint.py',
+    '^tools/.*\.py$',
+]
 
 [[tool.mypy.overrides]]
 module = "rotkehlchen.*"
@@ -114,6 +119,9 @@ exclude = [
 ]
 target-version = "py311"
 
+[tool.ruff.format]
+quote-style = "single"
+
 [tool.ruff.lint]
 preview = true  # https://docs.astral.sh/ruff/preview/
 # Allow unused variables when underscore-prefixed.
@@ -124,7 +132,7 @@ select = [
     "F",
     "W",
     "C",
-    # "I",  # isort -- not using since does not play well with running isort too
+    "I",  # isort
     # "D",  # pydocstyle -- too many docstuff we don't use
     "N",
     "B",
@@ -275,6 +283,14 @@ multiline-quotes = "double"
     "S603",  # Script called by us. No variable input
     "S607",  # Script called by us. Partial executable path is fine.
 ]
+"docs/conf.py" = [
+    "ERA001",  # Lots of comments with text combined with commented-out example code
+    "INP001",  # no need for __init__ here
+]
+"packaging/docker/entrypoint.py" = [
+    "S",  # fixme
+]
+
 
 # -- isort config section --
 
