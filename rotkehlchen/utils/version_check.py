@@ -4,7 +4,6 @@ from importlib.metadata import version
 from typing import TYPE_CHECKING, NamedTuple, Optional
 
 from packaging.version import InvalidVersion, Version
-
 from rotkehlchen.errors.misc import RemoteError
 
 if TYPE_CHECKING:
