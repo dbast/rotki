@@ -7,7 +7,8 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 from typing import TYPE_CHECKING, Any, Literal, Optional
 
-from flask import Blueprint, Request, Response, request as flask_request
+from flask import Blueprint, Request, Response
+from flask import request as flask_request
 from flask.views import MethodView
 from marshmallow import Schema, ValidationError
 from marshmallow.utils import missing

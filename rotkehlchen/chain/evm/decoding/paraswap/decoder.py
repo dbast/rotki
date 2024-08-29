@@ -30,6 +30,8 @@ from .constants import (
     SWAP_ON_UNISWAP_V2_FACTORY,
     SWAP_ON_UNISWAP_V2_FORK,
     SWAP_ON_UNISWAP_V2_FORK_WITH_PERMIT,
+)
+from .constants import (
     SWAP_SIGNATURE as PARASWAP_SWAP_SIGNATURE,
 )
 
