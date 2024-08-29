@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING, Any
 from unittest.mock import patch
 
 import pytest
-from packaging.version import Version
 
+from packaging.version import Version
 from rotkehlchen.assets.asset import EvmToken
 from rotkehlchen.chain.evm.constants import ZERO_ADDRESS
 from rotkehlchen.constants.resolver import evm_address_to_identifier

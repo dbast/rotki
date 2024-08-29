@@ -1,9 +1,9 @@
 from typing import Any
 
 from hexbytes import HexBytes
-from packaging.version import Version
 from web3.datastructures import AttributeDict
 
+from packaging.version import Version
 from rotkehlchen.accounting.mixins.event import AccountingEventType
 from rotkehlchen.accounting.structures.balance import AssetBalance, Balance, BalanceType
 from rotkehlchen.api.websockets.typedefs import WSMessageType

@@ -8,8 +8,8 @@ import pytest
 from eth_typing import HexAddress, HexStr
 from eth_utils import to_checksum_address
 from hexbytes import HexBytes
-from packaging.version import Version
 
+from packaging.version import Version
 from rotkehlchen.chain.ethereum.utils import generate_address_via_create2
 from rotkehlchen.errors.serialization import ConversionError
 from rotkehlchen.externalapis.github import Github

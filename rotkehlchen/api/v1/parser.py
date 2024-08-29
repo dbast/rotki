@@ -4,7 +4,8 @@ from typing import Any
 
 from flask import Request
 from flask.views import MethodView
-from marshmallow import Schema, exceptions as ma_exceptions
+from marshmallow import Schema
+from marshmallow import exceptions as ma_exceptions
 from webargs.core import _UNKNOWN_DEFAULT_PARAM, ArgMap, ValidateArg, _ensure_list_of_callables
 from webargs.flaskparser import FlaskParser
 
