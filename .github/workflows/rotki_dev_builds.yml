@@ -14,6 +14,7 @@ concurrency:
 env:
   PYTHON_MACOS: 11
 
+
 jobs:
   build-linux:
     name: Build linux binary
