@@ -1,17 +1,10 @@
-COMMON_LINT_PATHS = rotkehlchen/ rotkehlchen_mock/ package.py docs/conf.py packaging/docker/entrypoint.py
-TOOLS_LINT_PATH = tools/
-ALL_LINT_PATHS = $(COMMON_LINT_PATHS) $(TOOLS_LINT_PATH)
-
-lint:
-	ruff check .
-	double-indent --dry-run $(ALL_LINT_PATHS)
-	mypy $(COMMON_LINT_PATHS) --install-types --non-interactive
-	pylint --rcfile .pylint.rc $(ALL_LINT_PATHS)
+pre-commit:
+	pre-commit run --verbose --color=always --all-files --show-diff-on-failure
 
 
-format:
-	ruff check . --fix
-	double-indent $(ALL_LINT_PATHS)
+pre-commit-fast:
+	pre-commit run --verbose --color=always --all-files ruff
+	pre-commit run --verbose --color=always --all-files mypy
 
 
 clean:
@@ -55,3 +48,5 @@ create-cassette:
 # https://stackoverflow.com/a/6273809/110395
 %:
 	@:
+
+.PHONY: all $(MAKECMDGOALS)
