@@ -3,8 +3,7 @@ pre-commit:
 
 
 pre-commit-fast:
-	pre-commit run --verbose --color=always --all-files ruff
-	pre-commit run --verbose --color=always --all-files mypy
+	SKIP=pylint pre-commit run --verbose --color=always --all-files --show-diff-on-failure
 
 
 clean:
