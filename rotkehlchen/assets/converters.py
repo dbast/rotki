@@ -423,6 +423,22 @@ def asset_from_woo(woo_name: str) -> AssetWithOracles:
     ))
 
 
+def asset_from_mexc(mexc_name: str) -> AssetWithOracles:
+    """May raise:
+    - DeserializationError
+    - UnsupportedAsset
+    - UnknownAsset
+    """
+    if not isinstance(mexc_name, str):
+        raise DeserializationError(f'Got non-string type {type(mexc_name)} for mexc asset')
+
+    return symbol_to_asset_or_token(GlobalDBHandler.get_assetid_from_exchange_name(
+        exchange=Location.MEXC,
+        symbol=mexc_name,
+        default=mexc_name,
+    ))
+
+
 def asset_from_common_identifier(common_identifier: str) -> AssetWithOracles:
     """May raise:
     - DeserializationError

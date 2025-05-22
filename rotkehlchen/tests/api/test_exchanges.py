@@ -134,6 +134,7 @@ def test_setup_exchange(rotkehlchen_api_server: 'APIServer') -> None:
                 'Error validating API Keys',
                 'ApiKey has invalid value',
                 'Error validating Bitpanda API Key',
+                'Error validating MEXC API Key',
                 '',  # poloniex fails with no error message now
             ],
             status_code=HTTPStatus.CONFLICT,
@@ -197,6 +198,23 @@ def test_setup_exchange(rotkehlchen_api_server: 'APIServer') -> None:
         {'location': 'kraken', 'name': 'my_kraken', KRAKEN_ACCOUNT_TYPE_KEY: 'starter'},
         {'location': 'kraken', 'name': 'my_other_kraken', KRAKEN_ACCOUNT_TYPE_KEY: 'starter'},
         {'location': 'kucoin', 'name': 'my_kucoin'},
+    ]
+
+    # Check that MEXC can be registered
+    data = {'location': 'mexc', 'name': 'my_mexc', 'api_key': api_key, 'api_secret': api_secret}
+    with mock_validate_api_key_success(Location.MEXC):
+        response = requests.put(
+            api_url_for(rotkehlchen_api_server, 'exchangesresource'), json=data,
+        )
+    assert_simple_ok_response(response)
+    # and check that MEXC is now registered
+    response = requests.get(api_url_for(rotkehlchen_api_server, 'exchangesresource'))
+    result = assert_proper_sync_response_with_result(response)
+    assert result == [
+        {'location': 'kraken', 'name': 'my_kraken', KRAKEN_ACCOUNT_TYPE_KEY: 'starter'},
+        {'location': 'kraken', 'name': 'my_other_kraken', KRAKEN_ACCOUNT_TYPE_KEY: 'starter'},
+        {'location': 'kucoin', 'name': 'my_kucoin'},
+        {'location': 'mexc', 'name': 'my_mexc'},
     ]
 
 

@@ -20,6 +20,7 @@ SUPPORTED_EXCHANGES = EXCHANGES_WITH_PASSPHRASE + EXCHANGES_WITHOUT_API_SECRET +
     Location.WOO,
     Location.BYBIT,
     Location.HTX,
+    Location.MEXC,
 )
 
 DEAD_EXCHANGES = (Location.FTX, Location.FTXUS, Location.BITTREX, Location.COINBASEPRO)

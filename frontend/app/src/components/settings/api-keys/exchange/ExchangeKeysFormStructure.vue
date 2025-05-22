@@ -60,6 +60,14 @@ const customLabel: Record<string, LocationConfig> = {
       label: t('exchange_settings.inputs.passphrase'),
     },
   },
+  mexc: {
+    apiKey: {
+      label: t('exchange_settings.inputs.api_key'),
+    },
+    apiSecret: {
+      label: t('exchange_settings.inputs.api_secret'),
+    },
+  },
 };
 
 // Default data fallback
