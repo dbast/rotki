@@ -4,7 +4,7 @@ import argparse
 import os
 from typing import TYPE_CHECKING
 
-from rotkehlchen.mcp.backend import DEFAULT_BACKEND_URL
+from rotkehlchen.mcp.backend import DEFAULT_BACKEND_TIMEOUT, DEFAULT_BACKEND_URL
 from rotkehlchen.mcp.server import run_server
 
 if TYPE_CHECKING:
@@ -20,7 +20,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     )
     parser.add_argument(
         '--timeout',
-        default=5,
+        default=DEFAULT_BACKEND_TIMEOUT,
         type=int,
         help='Backend request timeout in seconds. Defaults to %(default)s',
     )
@@ -30,8 +30,19 @@ def main(argv: Sequence[str] | None = None) -> None:
         choices=('DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'),
         help='MCP server log level. Defaults to %(default)s',
     )
+    parser.add_argument(
+        '--privacy-mode',
+        default=os.environ.get('ROTKI_MCP_PRIVACY_MODE', 'balanced'),
+        choices=('balanced', 'strict', 'raw'),
+        help='Privacy mode for analytics tables. Defaults to %(default)s',
+    )
     args = parser.parse_args(argv)
-    run_server(backend_url=args.backend_url, timeout=args.timeout, log_level=args.log_level)
+    run_server(
+        backend_url=args.backend_url,
+        timeout=args.timeout,
+        log_level=args.log_level,
+        privacy_mode=args.privacy_mode,
+    )
 
 
 if __name__ == '__main__':

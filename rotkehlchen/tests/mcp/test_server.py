@@ -87,3 +87,11 @@ def test_setup_server_should_gate_premium_tools(monkeypatch) -> None:
         assert calls == ['ran']
     finally:
         loop.close()
+
+
+def test_setup_server_should_register_real_tools() -> None:
+    server.setup_server(
+        backend_url='http://backend/api/1',
+        timeout=3,
+        log_level='DEBUG',
+    )

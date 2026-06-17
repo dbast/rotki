@@ -28,11 +28,12 @@ class MockResponse:
 
 
 def test_configure_backend_should_update_config() -> None:
-    configure_backend(base_url='http://backend/api/1', timeout=5)
+    configure_backend(base_url='http://backend/api/1', timeout=5, privacy_mode='strict')
     backend_config = get_backend_config()
 
     assert backend_config.base_url == 'http://backend/api/1'
     assert backend_config.timeout == 5
+    assert backend_config.privacy_mode == 'strict'
 
 
 def test_request_api_should_raise_query_error_on_connection_failure(monkeypatch) -> None:
